@@ -1,0 +1,19 @@
+{
+  "kind": "collectionType",
+  "collectionName": "sexos",
+  "info": {
+    "name": "sexo"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "tipo_sexo": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

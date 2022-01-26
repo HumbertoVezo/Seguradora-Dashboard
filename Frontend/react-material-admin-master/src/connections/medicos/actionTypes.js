@@ -1,0 +1,7 @@
+export const CREATE_MEDICO = "CREATE_MEDICO";
+
+export const RETRIEVE_MEDICOS = "RETRIEVE_MEDICOS";
+
+export const UPDATE_MEDICO = "UPDATE_MEDICO";
+
+export const DELETE_MEDICO = "DELETE_MEDICO";

@@ -1,0 +1,19 @@
+{
+  "kind": "collectionType",
+  "collectionName": "docs",
+  "info": {
+    "name": "doc"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "tipo_doc": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

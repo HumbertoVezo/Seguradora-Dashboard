@@ -1,0 +1,18 @@
+{
+  "kind": "collectionType",
+  "collectionName": "restricaos",
+  "info": {
+    "name": "restricao"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "ocorencia": {
+      "type": "string"
+    }
+  }
+}

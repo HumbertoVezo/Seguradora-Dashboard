@@ -1,0 +1,18 @@
+{
+  "kind": "collectionType",
+  "collectionName": "categoria_cartas",
+  "info": {
+    "name": "categoria_carta"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "cat_carta": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/restricaos",
+      "handler": "restricao.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/restricaos/count",
+      "handler": "restricao.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/restricaos/:id",
+      "handler": "restricao.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/restricaos",
+      "handler": "restricao.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/restricaos/:id",
+      "handler": "restricao.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/restricaos/:id",
+      "handler": "restricao.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

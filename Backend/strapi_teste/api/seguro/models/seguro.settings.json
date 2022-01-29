@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "seguros",
+  "info": {
+    "name": "seguro"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "data_inicio": {
+      "type": "date"
+    },
+    "data_renovacao": {
+      "type": "date"
+    },
+    "segurado": {
+      "model": "segurado",
+      "via": "seguros"
+    }
+  }
+}

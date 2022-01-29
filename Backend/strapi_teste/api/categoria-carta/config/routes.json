@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/categoria-cartas",
+      "handler": "categoria-carta.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/categoria-cartas/count",
+      "handler": "categoria-carta.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/categoria-cartas/:id",
+      "handler": "categoria-carta.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/categoria-cartas",
+      "handler": "categoria-carta.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/categoria-cartas/:id",
+      "handler": "categoria-carta.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/categoria-cartas/:id",
+      "handler": "categoria-carta.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

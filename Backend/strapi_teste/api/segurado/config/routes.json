@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/segurados",
+      "handler": "segurado.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/segurados/count",
+      "handler": "segurado.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/segurados/:id",
+      "handler": "segurado.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/segurados",
+      "handler": "segurado.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/segurados/:id",
+      "handler": "segurado.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/segurados/:id",
+      "handler": "segurado.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

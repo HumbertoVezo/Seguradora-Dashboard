@@ -1,0 +1,40 @@
+{
+  "kind": "collectionType",
+  "collectionName": "segurados",
+  "info": {
+    "name": "segurado",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "cod_doc": {
+      "type": "string"
+    },
+    "nome": {
+      "type": "string"
+    },
+    "data_carteira": {
+      "type": "date"
+    },
+    "conselho": {
+      "type": "string"
+    },
+    "localidade": {
+      "type": "string"
+    },
+    "sexo": {
+      "model": "sexo"
+    },
+    "categoria_cartas": {
+      "collection": "categoria-carta"
+    },
+    "restricao": {
+      "model": "restricao"
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "kind": "collectionType",
+  "collectionName": "ilhas",
+  "info": {
+    "name": "ilha"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "nome_ilha": {
+      "type": "string"
+    }
+  }
+}

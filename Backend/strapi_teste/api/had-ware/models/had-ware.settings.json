@@ -1,0 +1,34 @@
+{
+  "kind": "collectionType",
+  "collectionName": "had_wares",
+  "info": {
+    "name": "had_ware",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "marca": {
+      "type": "string"
+    },
+    "preco": {
+      "type": "string"
+    },
+    "tipo_hardware": {
+      "model": "tipo-hardware"
+    },
+    "data_aquisicao": {
+      "type": "date"
+    },
+    "quantidade": {
+      "type": "string"
+    },
+    "nome": {
+      "type": "string"
+    }
+  }
+}

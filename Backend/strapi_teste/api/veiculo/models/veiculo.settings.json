@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "veiculos",
+  "info": {
+    "name": "veiculo",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "matricula": {
+      "type": "string"
+    },
+    "marca_veiculo": {
+      "type": "string"
+    },
+    "modelo_veiculo": {
+      "type": "string"
+    }
+  }
+}

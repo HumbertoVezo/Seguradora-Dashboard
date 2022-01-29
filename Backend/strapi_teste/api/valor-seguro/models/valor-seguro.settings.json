@@ -1,0 +1,18 @@
+{
+  "kind": "collectionType",
+  "collectionName": "valor_seguros",
+  "info": {
+    "name": "valor_seguro"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "valor": {
+      "type": "string"
+    }
+  }
+}

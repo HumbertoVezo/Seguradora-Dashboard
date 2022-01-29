@@ -1,0 +1,18 @@
+{
+  "kind": "collectionType",
+  "collectionName": "estados",
+  "info": {
+    "name": "estado"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "situacao": {
+      "type": "string"
+    }
+  }
+}

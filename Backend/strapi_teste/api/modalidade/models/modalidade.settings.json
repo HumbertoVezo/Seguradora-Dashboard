@@ -1,0 +1,18 @@
+{
+  "kind": "collectionType",
+  "collectionName": "modalidades",
+  "info": {
+    "name": "modalidade"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "tipo_seguro": {
+      "type": "string"
+    }
+  }
+}

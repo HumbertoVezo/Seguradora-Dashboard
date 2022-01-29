@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/had-wares",
+      "handler": "had-ware.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/had-wares/count",
+      "handler": "had-ware.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/had-wares/:id",
+      "handler": "had-ware.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/had-wares",
+      "handler": "had-ware.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/had-wares/:id",
+      "handler": "had-ware.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/had-wares/:id",
+      "handler": "had-ware.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

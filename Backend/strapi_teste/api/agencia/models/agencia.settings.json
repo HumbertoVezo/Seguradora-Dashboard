@@ -1,0 +1,24 @@
+{
+  "kind": "collectionType",
+  "collectionName": "agencias",
+  "info": {
+    "name": "agencia"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "localidade": {
+      "type": "string"
+    },
+    "ilha": {
+      "model": "ilha"
+    },
+    "nome_gerente": {
+      "type": "string"
+    }
+  }
+}

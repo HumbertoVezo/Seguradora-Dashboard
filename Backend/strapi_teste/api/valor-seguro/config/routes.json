@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/valor-seguros",
+      "handler": "valor-seguro.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/valor-seguros/count",
+      "handler": "valor-seguro.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/valor-seguros/:id",
+      "handler": "valor-seguro.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/valor-seguros",
+      "handler": "valor-seguro.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/valor-seguros/:id",
+      "handler": "valor-seguro.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/valor-seguros/:id",
+      "handler": "valor-seguro.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

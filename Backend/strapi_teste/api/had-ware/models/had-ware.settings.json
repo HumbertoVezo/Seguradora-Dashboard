@@ -23,6 +23,12 @@
     },
     "data_aquisicao": {
       "type": "date"
+    },
+    "quantidade": {
+      "type": "string"
+    },
+    "nome": {
+      "type": "string"
     }
   }
 }

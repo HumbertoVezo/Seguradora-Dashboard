@@ -33,13 +33,11 @@ const structure = [
   /* { id: 0, label: "Registos", link: "/app/list-medico", icon: <HomeIcon /> }, */
   {
     id: 4,
-    label: "Registos",
+    label: "CIO",
     link: "/app",
     icon: <UIElementsIcon />,
     children: [
-      { label: "Medicos", link: "/app/list-medico" },
       { label: "Consultas", link: "/app/list-consulta" },
-      { label: "Pacientes", link: "/app/list-paciente" },
     ],
   },
   /* {

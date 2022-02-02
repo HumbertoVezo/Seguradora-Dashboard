@@ -33,30 +33,10 @@ import Tables from "../../pages/tables";
 import Icons from "../../pages/icons";
 import Charts from "../../pages/charts";
 
-//medico pages
-import MedicoList from "../../pages/medico/MedicoList.jsx";
-import AddMedico from "../../pages/medico/AddMedico.jsx";
-import EditMedico from "../../pages/medico/EditMedico.jsx";
-
 //consulta pages
 import ConsultaList from "../../pages/consulta/ConsultaList.jsx";
 import AddConsulta from "../../pages/consulta/AddConsulta.jsx";
 import EditConsulta from "../../pages/consulta/EditConsulta.jsx";
-
-//especialidade pages
-import EspecialidadeList from "../../pages/especialidade/EspecialidadeList.jsx";
-import AddEspecialidade from "../../pages/especialidade/AddEspecialidade.jsx";
-import EditEspecialidade from "../../pages/especialidade/EditEspecialidade.jsx";
-
-//paciente pages
-import PacienteList from "../../pages/paciente/PacienteList.jsx";
-import AddPaciente from "../../pages/paciente/AddPaciente.jsx";
-import EditPaciente from "../../pages/paciente/EditPaciente.jsx";
-
-//servico pages
-import ServicoList from "../../pages/servico/ServicoList.jsx";
-import AddServico from "../../pages/servico/AddServico.jsx";
-import EditServico from "../../pages/servico/EditServico.jsx";
 
 // context
 import { useLayoutState } from "../../context/LayoutContext";
@@ -81,25 +61,9 @@ function Layout(props) {
             <Switch>
               <Route path="/app/dashboard" component={Dashboard} />
               
-              <Route path="/app/list-medico" component={MedicoList} />
-              <Route path="/app/edit-medico/:id" component={EditMedico} />
-              <Route path="/app/add-medico" component={AddMedico} />
-              
               <Route path="/app/list-consulta" component={ConsultaList} />
               <Route path="/app/edit-consulta/:id" component={EditConsulta} />
               <Route path="/app/add-consulta" component={AddConsulta} />
-
-              <Route path="/app/list-especialidade" component={EspecialidadeList} />
-              <Route path="/app/edit-especialidade/:id" component={EditEspecialidade} />
-              <Route path="/app/add-especialidade" component={AddEspecialidade} />
-
-              <Route path="/app/list-paciente" component={PacienteList} />
-              <Route path="/app/edit-paciente/:id" component={EditPaciente} />
-              <Route path="/app/add-paciente" component={AddPaciente} />
-
-              <Route path="/app/list-servico" component={ServicoList} />
-              <Route path="/app/edit-servico/:id" component={EditServico} />
-              <Route path="/app/add-servico" component={AddServico} />
 
               <Route path="/app/typography" component={Typography} />
               <Route path="/app/tables" component={Tables} />

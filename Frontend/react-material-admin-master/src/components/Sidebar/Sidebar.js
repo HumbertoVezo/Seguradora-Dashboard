@@ -42,7 +42,7 @@ const structure = [
       { label: "Pacientes", link: "/app/list-paciente" },
     ],
   },
-  {
+  /* {
     id: 1,
     label: "Parametrização",
     link: "/app",
@@ -51,7 +51,7 @@ const structure = [
       { label: "Serviços", link: "/app/list-servico" },
       { label: "Especialidades", link: "/app/list-especialidade" },
     ],
-  },
+  }, */
   /* {
     id: 1,
     label: "Typography",

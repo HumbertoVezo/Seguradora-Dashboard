@@ -33,16 +33,14 @@ const structure = [
   /* { id: 0, label: "Registos", link: "/app/list-medico", icon: <HomeIcon /> }, */
   {
     id: 4,
-    label: "Registos",
+    label: "CIO",
     link: "/app",
     icon: <UIElementsIcon />,
     children: [
-      { label: "Medicos", link: "/app/list-medico" },
       { label: "Consultas", link: "/app/list-consulta" },
-      { label: "Pacientes", link: "/app/list-paciente" },
     ],
   },
-  {
+  /* {
     id: 1,
     label: "Parametrização",
     link: "/app",
@@ -51,7 +49,7 @@ const structure = [
       { label: "Serviços", link: "/app/list-servico" },
       { label: "Especialidades", link: "/app/list-especialidade" },
     ],
-  },
+  }, */
   /* {
     id: 1,
     label: "Typography",

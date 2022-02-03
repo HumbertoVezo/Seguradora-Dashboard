@@ -1,4 +1,4 @@
-import { retrieveCorrentelitoraneas } from "../../../conection/correnteslitoraneas/actions";
+import { retrieveDepartamentos } from "../../connections/departamentos/actions";
 import moment from "moment";
 import Box from "@mui/material/Box";
 import React, { Component } from "react";
@@ -16,7 +16,7 @@ import {
 import { Item } from "./Item";
 
 const minOffset = 0;
-const maxOffset = 60;
+const maxOffset = 5;
 
 const getInitialState = () => [
   { x: "Janeiro", y: null },
@@ -33,7 +33,7 @@ const getInitialState = () => [
   { x: "Dezembro", y: null },
 ];
 
-class GraficoCorrentes extends Component {
+class GraficoHardwares extends Component {
   constructor(props) {
     super(props);
     const year = new Date().getFullYear();
@@ -43,25 +43,25 @@ class GraficoCorrentes extends Component {
       selectOptions: [],
       thisYear: new Date().getFullYear(),
       selectedYear: new Date().getFullYear(),
-      data_medicao_colitoranea: getInitialState(),
-      data_medicao_colitoranea1: getInitialState(),
+      data_aquisicao: getInitialState(),
+      data_aquisicao1: getInitialState(),
     };
   }
   componentDidMount() {
-    this.props.retrieveCorrentelitoraneas();
+    this.props.retrieveDepartamentos();
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.praiaId !== this.props.praiaId) {
-      this.onHandleChange(this.props.praiaId);
+    if (prevProps.departamentoId !== this.props.departamentoId) {
+      this.onHandleChange(this.props.departamentoeId);
     }
   }
 
-  onHandleChange = (praiaId) => {
-    const corrente = this.props.correntelitoraneas.filter(
-      (resultado) => resultado.praia.id === praiaId
+  onHandleChange = (departamentoId) => {
+    const had_ware = this.props.departamento.filter(
+      (resultado) => resultado.departamento.id === departamentoId  // verificar isso se der erro
     );
-    console.log(corrente);
+    console.log(had_ware);
 
     let media_janeiro = 0;
     let total_janeiro = 0;
@@ -122,20 +122,20 @@ class GraficoCorrentes extends Component {
     let media_dezembro;
     let total_dezembro = 0;
     let soma_dezembro = 0;
-    corrente.map((e) => {
+    had_ware.map((e) => {
       if (moment(e.date).format("MMMM YYYY") == "January") {
         total_janeiro += 1;
-        soma_janeiro = soma_janeiro + e.direction_after_1_minute;
+        soma_janeiro = soma_janeiro + e.preco;
         media_janeiro = soma_janeiro / total_janeiro;
         total_janeiro1 += 1;
-        soma_janeiro1 = soma_janeiro1 + e.direction_after_5_minutes;
+        soma_janeiro1 = soma_janeiro1 + e.preco;
         media_janeiro1 = soma_janeiro1 / total_janeiro1;
 
         total_janeiro2 += 1;
-        soma_janeiro2 = soma_janeiro2 + e.spoed_after_1_minute;
+        soma_janeiro2 = soma_janeiro2 + e.preco;
         media_janeiro2 = soma_janeiro2 / total_janeiro2;
         total_janeiro3 += 1;
-        soma_janeiro3 = soma_janeiro3 + e.spoed_after_5_minutes;
+        soma_janeiro3 = soma_janeiro3 + e.preco;
         media_janeiro3 = soma_janeiro3 / total_janeiro3;
       } else if (moment(e.date).format("MMMM YYYY") == "February") {
       }
@@ -151,7 +151,7 @@ class GraficoCorrentes extends Component {
 
   UpdateUpdateInitialStateState(month) {
     this.setState({
-      [`correnteslitoraneas${month}`]: getInitialState(),
+      [`had-wares${month}`]: getInitialState(),
     });
   }
 
@@ -163,10 +163,10 @@ class GraficoCorrentes extends Component {
       // Can be add a customStart parameter to sum with result
       //                                     if scales doesn't start at same point
       const maxSalesValue = Math.max(
-        ...this.state.data_medicao_colitoranea.map((item) => item.y)
+        ...this.state.data_aquisicao.map((item) => item.y)
       ); // Get max value from sales data
       const maxPriceValue = Math.max(
-        ...this.state.data_medicao_colitoranea1.map((item) => item.y)
+        ...this.state.data_aquisicao1.map((item) => item.y)
       ); // Get max value from prices data
       const factor = maxSalesValue / maxPriceValue; // Calculate factor to convert sales tick to price tick
       return Math.round(tick / factor); // Return result as a integer
@@ -180,7 +180,7 @@ class GraficoCorrentes extends Component {
       <Box gridColumn="span 12" sx={{ flexGrow: 1 }}>
         <Item elevation={3}>
           <p1>
-            Gráfico de barras das variações de direção de correntes litorâneas
+            Gráfico de barras dos hardwares por departamentos adequiridos   
             ao longo do tempo
           </p1>
           <div className="col-lg-2">
@@ -224,7 +224,7 @@ class GraficoCorrentes extends Component {
                 color="#f37748"
                 data={[
                   { x: "", y: "" },
-                  ...this.state.data_medicao_colitoranea,
+                  ...this.state.data_aquisicao,
                 ]}
               />
 
@@ -241,7 +241,7 @@ class GraficoCorrentes extends Component {
                 Type="line"
                 data={[
                   { x: "", y: "" },
-                  ...this.state.data_medicao_colitoranea,
+                  ...this.state.data_aquisicao,
                 ]}
               />
             </XYPlot>
@@ -253,9 +253,9 @@ class GraficoCorrentes extends Component {
 }
 const mapStateToProps = (state) => {
   return {
-    correntelitoraneas: state.correnteslitoraneas,
+    had_wares: state.had_wares,
   };
 };
 export default connect(mapStateToProps, {
-  retrieveCorrentelitoraneas,
-})(GraficoCorrentes);
+  retrieveDepartamentos,
+})(GraficoHardwares);

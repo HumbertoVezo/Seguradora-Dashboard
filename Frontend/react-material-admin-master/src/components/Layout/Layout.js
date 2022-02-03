@@ -38,6 +38,9 @@ import ConsultaList from "../../pages/consulta/ConsultaList.jsx";
 import AddConsulta from "../../pages/consulta/AddConsulta.jsx";
 import EditConsulta from "../../pages/consulta/EditConsulta.jsx";
 
+//dashboard pages
+import DashboardCIO from "../../pages/dashboardCIO/dashboard";
+
 // context
 import { useLayoutState } from "../../context/LayoutContext";
 
@@ -64,6 +67,8 @@ function Layout(props) {
               <Route path="/app/list-consulta" component={ConsultaList} />
               <Route path="/app/edit-consulta/:id" component={EditConsulta} />
               <Route path="/app/add-consulta" component={AddConsulta} />
+
+              <Route path="/app/dashboard-cio" component={DashboardCIO} />
 
               <Route path="/app/typography" component={Typography} />
               <Route path="/app/tables" component={Tables} />

@@ -2,7 +2,8 @@
   "kind": "collectionType",
   "collectionName": "agencias",
   "info": {
-    "name": "agencia"
+    "name": "agencia",
+    "description": ""
   },
   "options": {
     "increments": true,
@@ -19,6 +20,9 @@
     },
     "nome_gerente": {
       "type": "string"
+    },
+    "departamentos": {
+      "collection": "departamento"
     }
   }
 }

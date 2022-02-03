@@ -2,7 +2,8 @@
   "kind": "collectionType",
   "collectionName": "departamentos",
   "info": {
-    "name": "departamento"
+    "name": "departamento",
+    "description": ""
   },
   "options": {
     "increments": true,
@@ -13,6 +14,9 @@
   "attributes": {
     "nome_departamento": {
       "type": "string"
+    },
+    "had_wares": {
+      "collection": "had-ware"
     }
   }
 }

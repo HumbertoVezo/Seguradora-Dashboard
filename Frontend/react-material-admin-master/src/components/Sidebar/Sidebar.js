@@ -40,16 +40,15 @@ const structure = [
       { label: "Consultas", link: "/app/list-consulta" },
     ],
   },
-  /* {
+  {
     id: 1,
-    label: "Parametrização",
+    label: "CEO",
     link: "/app",
     icon: <TypographyIcon />,
     children: [
-      { label: "Serviços", link: "/app/list-servico" },
-      { label: "Especialidades", link: "/app/list-especialidade" },
+      { label: "Consultas", link: "/app/list-consulta" },
     ],
-  }, */
+  },
   /* {
     id: 1,
     label: "Typography",

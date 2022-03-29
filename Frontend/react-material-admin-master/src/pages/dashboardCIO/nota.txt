@@ -7,14 +7,12 @@ import "react-vis/dist/style.css";
 
 import Box from "@mui/material/Box";
 
-import GraficoSeguros from "./GraficoSeguros";
-import GraficoEstado from "./GraficoEstado";
-import GraficoSituacao from "./GraficoSituacao";
+import GraficoHardwares from "./GraficoHardwares";
 
 class Dashboard extends Component {
   constructor(props) {
     super(props);
-  //  this.handleChange = this.handleChange.bind(this);
+    this.handleChange = this.handleChange.bind(this);
 
     this.state = {
       selectOptions: [],
@@ -22,27 +20,21 @@ class Dashboard extends Component {
     };
   }
 
-  async getOptionsSegurado() {
-    const res = await axios.get("localhost:1337/segurados");
+  
+  async getOptionsDepartamento() {
+    const res = await axios.get("http://localhost:1337/departamentos");
     const data = res.data;
 
     const options = data.map((e) => ({
       value: e.id,
-      label: e.nome,
+      label: e.nome_departamento,
     }));
 
     this.setState({ selectOptions: options });
   }
 
-  async handleChange(e) {
-    this.setState({ currentSegurado: e.value });
-
-   
-    const seguro = this.props.seguros.filter( e => e.segurado.id === e.value)
-  }
-
   componentDidMount() {
-    this.getOptionsSegurado();
+    this.getOptionsDepartamento();
   }
   render() {
 
@@ -52,13 +44,13 @@ class Dashboard extends Component {
           <div className="row">
             <div className="col-lg-12">
               <div className="end" />
-              <h3 style={{ color: "#f9812a" }}>Dashboard</h3> <br />
+              <h3 style={{ color: "#f9812a" }}>Gráficos</h3> <br />
               <div className="col-lg-5">
                 <Select
                   options={this.state.selectOptions}
-                  id="segurado"
-                  name="segurado"
-                  onChange={this.handleChange}
+                  id="departamento"
+                  name="departamento"
+                  onChange={this.handleChange.bind(this)}
                 />
               </div>{" "}
               <br /> <br />
@@ -72,9 +64,13 @@ class Dashboard extends Component {
                     gridTemplateColumns="repeat(12, 1fr)"
                     gap={5}
                   >
-                   {/*  <GraficoSituacao seguradoId={this.state.currentSegurado} /> */}
-                    {/* <GraficoEstado seguradoId={this.state.currentSegurado} /> */}
-                    {/* <GraficoSeguros seguradoId={this.state.currentSegurado} />  */}
+                    {/* <GraficoTamanhoSedimentoQuantidade praiaId={this.state.currentPraia} />
+                    <GraficoTamanhoSedimento praiaId={this.state.currentPraia} />
+                    <GraficoMudancaSedimento  praiaId={this.state.currentPraia} />
+                    <GraficoDetritos praiaId={this.state.currentPraia} />
+                    <GraficoOndas praiaId={this.state.currentPraia} /> */} 
+                  <GraficoHardwares departamentoId={this.state.currentDepartamento} />
+                    {/* <GraficoVelCorrentes praiaId={this.state.currentPraia} /> */}
                   </Box>
                 </Box>
               </div>
@@ -103,4 +99,11 @@ class Dashboard extends Component {
     );
   }
 }
-export default connect(Dashboard);
+
+const mapStateToProps = (state) => {
+  return {
+    had_wares: state.had_wares,
+  };
+};
+
+export default connect(mapStateToProps,)(Dashboard);

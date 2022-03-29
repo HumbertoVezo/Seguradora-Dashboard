@@ -4,7 +4,7 @@ import { DiscreteColorLegend, HorizontalGridLines, VerticalBarSeries, VerticalGr
 import { styled } from "@mui/material/styles";
 import { Paper } from "@mui/material";
 import { connect } from "react-redux";
-import { retrieveDetritosPraias } from "../../../conection/detritosPraia/actions";
+import { retrieveSeguros } from "../../connections/seguros/actions";
 import moment from "moment";
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -16,41 +16,23 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 const minOffset = 0;
-const maxOffset = 60;
+const maxOffset = 10;
 
-function getDetritos(madeira, plastico, vidro, papel, corda, natural, bolasDeAlcatrao, isopor, pontasDeCigarros, aluminio, borracha) {
+function getSeguros(pago, naopago) {
   return [
-    { x: "Madeira", y: madeira },
-    { x: "Plástico", y: plastico },
-    { x: "Vidro", y: vidro },
-    { x: "Papel", y: papel },
-    { x: "Corda", y: corda },
-    { x: "Natural", y: natural },
-    { x: "Bolas de alcatrão", y: bolasDeAlcatrao },
-    { x: "Isopor", y: isopor },
-    { x: "Pontas de cigarros", y: pontasDeCigarros },
-    { x: "Alumínio", y: aluminio },
-    { x: "Borracha", y: borracha },
+    { x: "Pago", y: pago },
+    { x: "Não Pago", y: naopago },
   ]
 }
 
 function initialValues(month) {
   return {
-    quantMadeira: 0,
-    quantPlastico: 0,
-    quantVidro: 0,
-    quantPapel: 0,
-    quantCorda: 0,
-    quantNatural: 0,
-    quantBolas: 0,
-    quantIsopor: 0,
-    quantPontas: 0,
-    quantAluminio: 0,
-    quantBoracha: 0
+    quantPago: 0,
+    quantNaoPago: 0,
   }
 }
 
-class GraficoDetritos extends Component {
+class GraficoSeguros extends Component {
   constructor(props) {
     super(props);
 
@@ -61,18 +43,18 @@ class GraficoDetritos extends Component {
       currentPraia: null,
       thisYear: new Date().getFullYear(),
       selectedYear: new Date().getFullYear(),
-      detritosJan: getDetritos(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-      detritosFev: getDetritos(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-      detritosMar: getDetritos(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-      detritosAbr: getDetritos(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-      detritosMai: getDetritos(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-      detritosJun: getDetritos(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-      detritosJul: getDetritos(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-      detritosAgo: getDetritos(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-      detritosSet: getDetritos(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-      detritosOut: getDetritos(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-      detritosNov: getDetritos(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-      detritosDec: getDetritos(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+      segurosJan: getSeguros(0, 0),
+      segurosFev: getSeguros(0, 0),
+      segurosMar: getSeguros(0, 0),
+      segurosAbr: getSeguros(0, 0),
+      segurosMai: getSeguros(0, 0),
+      segurosJun: getSeguros(0, 0),
+      segurosJul: getSeguros(0, 0),
+      segurosAgo: getSeguros(0, 0),
+      segurosSet: getSeguros(0, 0),
+      segurosOut: getSeguros(0, 0),
+      segurosNov: getSeguros(0, 0),
+      segurosDec: getSeguros(0, 0),
       january: initialValues(),
       february: initialValues(),
       march: initialValues(),
@@ -87,82 +69,82 @@ class GraficoDetritos extends Component {
       december: initialValues(),
 
     };
-    this.SumDetritos = this.SumDetritos.bind(this);
+    //this.SumSeguros = this.SumSeguros.bind(this);
   }
 
 
   componentDidMount() {
-    this.props.retrieveDetritosPraias();
+    this.props.retrieveSeguros();
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.praiaId !== this.props.praiaId) {
-      this.handleDetritos(this.props.praiaId)
+    if (prevProps.seguradoId !== this.props.seguradoId) {
+      this.handleSeguros(this.props.seguradoId)
     }
 
     if (prevState.january !== this.state.january) {
-      this.UpdateDetritoState('Jan', 'january');
+      this.UpdateSeguroState('Jan', 'january');
     }
     if (prevState.february !== this.state.february) {
-      this.UpdateDetritoState('Fev', 'february');
+      this.UpdateSeguroState('Fev', 'february');
     }
 
     if (prevState.march !== this.state.march) {
-      this.UpdateDetritoState('Mar', 'march');
+      this.UpdateSeguroState('Mar', 'march');
     }
     if (prevState.april !== this.state.april) {
-      this.UpdateDetritoState('Abr', 'april');
+      this.UpdateSeguroState('Abr', 'april');
     }
     if (prevState.may !== this.state.may) {
-      this.UpdateDetritoState('Mai', 'may');
+      this.UpdateSeguroState('Mai', 'may');
     }
     if (prevState.june !== this.state.june) {
-      this.UpdateDetritoState('Jun', 'june');
+      this.UpdateSeguroState('Jun', 'june');
     }
     if (prevState.july !== this.state.july) {
-      this.UpdateDetritoState('Jul', 'july');
+      this.UpdateSeguroState('Jul', 'july');
     }
     if (prevState.august !== this.state.august) {
-      this.UpdateDetritoState('Ago', 'august');
+      this.UpdateSeguroState('Ago', 'august');
     }
     if (prevState.september !== this.state.september) {
-      this.UpdateDetritoState('Set', 'september');
+      this.UpdateSeguroState('Set', 'september');
     }
     if (prevState.october !== this.state.october) {
-      this.UpdateDetritoState('Out', 'october');
+      this.UpdateSeguroState('Out', 'october');
     }
     if (prevState.november !== this.state.november) {
-      this.UpdateDetritoState('Nov', 'november');
+      this.UpdateSeguroState('Nov', 'november');
     }
     if (prevState.december !== this.state.december) {
-      this.UpdateDetritoState('Dec', 'december');
+      this.UpdateSeguroState('Dec', 'december');
     }
 
   }
 
 
-  handleDetritos(praiaId) {
+  handleSeguros(seguradoId) {
 
-    const resultadoDetritos = this.props.detritos.filter(
-      (detrito) => detrito.praia.id === praiaId
+    const resultadoSeguros = this.props.seguros.filter(
+      (seguro) => seguro.segurado.id === seguradoId
     );
 
     this.InitStates();
 
-    resultadoDetritos.forEach((item) => {
+    resultadoSeguros.forEach((item) => {
       this.HandleMonth(item)
 
     });
   }
 
-  DateHandleDetritos(event) {
-    const resultadoDetritos = this.props.detritos.filter(
-      (detrito) => detrito.praia.id === this.props.praiaId
+  DateHandleSeguros(event) {
+    const resultadoSeguros = this.props.seguros.filter(
+      (seguro) => seguro.segurado.id === this.props.seguradoId
     );
 
     this.InitStates();
 
-    resultadoDetritos.forEach((item) => {
+    resultadoSeguros.forEach((item) => {
 
       if (moment(item.date).format("YYYY") === event.target.value) {
         this.HandleMonth(item)
@@ -191,134 +173,120 @@ class GraficoDetritos extends Component {
   CheckMonth = (item, month) => {
 
     if (moment(item.date).format("MMMM") === month) {
-      this.CheckDetrito(item, month, 'quantPlastico', "Plastico");
-      this.CheckDetrito(item, month, 'quantPlastico', "Plastico");
-      this.CheckDetrito(item, month, 'quantMadeira', "Madeira");
-      this.CheckDetrito(item, month, 'quantVidro', "Vidro");
-      this.CheckDetrito(item, month, 'quantPapel', "Papel");
-      this.CheckDetrito(item, month, 'quantCorda', "Corda");
-      this.CheckDetrito(item, month, 'quantNatural', "Natural");
-      this.CheckDetrito(item, month, 'quantIsopor', "Isopor(esferovite)");
-      this.CheckDetrito(item, month, 'quantAluminio', "Alumínio");
-      this.CheckDetrito(item, month, 'quantBoracha', "Borracha");
-      this.CheckDetrito(item, month, 'quantBolas', "Bolas de alcatrão");
-      this.CheckDetrito(item, month, 'quantPontas', "Pontas de cigarros");
-
+      this.CheckSeguro(item, month, 'quantPago', "Pago");
+      this.CheckSeguro(item, month, 'quantNaoPago', "NaoPago");
     }
   }
 
-  CheckDetrito(item, month, descQuant, detrito) {
-    if (item.detrito.name_detrito === detrito) {
-      this.SumDetritos(month.toLowerCase(), descQuant, item.quantity);
+  CheckSeguro(item, month, descQuant, seguro) {
+    if (item.seguro.estado.situacao === seguro) {
+      this.SumSeguros(month.toLowerCase(), descQuant, item.quantity);
     }
   }
 
   InitStates() {
-    this.InitializeDetritoState('Jan');
-    this.InitializeDetritoState('Fev');
-    this.InitializeDetritoState('Mar');
-    this.InitializeDetritoState('Abr');
-    this.InitializeDetritoState('Mai');
-    this.InitializeDetritoState('Jun');
-    this.InitializeDetritoState('Jul');
-    this.InitializeDetritoState('Ago');
-    this.InitializeDetritoState('Set');
-    this.InitializeDetritoState('Out');
-    this.InitializeDetritoState('Nov');
-    this.InitializeDetritoState('Dec');
+    this.InitializeSeguroState('Jan');
+    this.InitializeSeguroState('Fev');
+    this.InitializeSeguroState('Mar');
+    this.InitializeSeguroState('Abr');
+    this.InitializeSeguroState('Mai');
+    this.InitializeSeguroState('Jun');
+    this.InitializeSeguroState('Jul');
+    this.InitializeSeguroState('Ago');
+    this.InitializeSeguroState('Set');
+    this.InitializeSeguroState('Out');
+    this.InitializeSeguroState('Nov');
+    this.InitializeSeguroState('Dec');
   }
 
-  UpdateDetritoState(month2, month) {
+  UpdateSeguroState(month2, month) {
     this.setState({
-      [`detritos${month2}`]: getDetritos(this.state[month].quantMadeira, this.state[month].quantPlastico,
-        this.state[month].quantVidro, this.state[month].quantPapel, this.state[month].quantCorda,
-        this.state[month].quantNatural, this.state[month].quantBolas, this.state[month].quantIsopor,
-        this.state[month].quantPontas, this.state[month].quantAluminio, this.state[month].quantBoracha)
+      [`seguros${month2}`]: getSeguros(this.state[month].quantPago, this.state[month].quantNaoPago)
     });
   }
 
-  InitializeDetritoState(month) {
+  InitializeSeguroState(month) {
     this.setState({
-      [`detritos${month}`]: getDetritos(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+      [`seguros${month}`]: getSeguros(0, 0)
     });
   }
 
-  SumDetritos(month, detrito, value) {
+  SumSeguros(month, seguro, value) {
     this.setState(prevState => ({
       [month]: {
         ...prevState[month],
-        [detrito]: prevState[month][detrito] + value
+        [seguro]: prevState[month][seguro] + value
       }
     }))
   }
   render() {
 
-    const { thisYear, detritosJan, detritosFev, detritosAbr, detritosAgo,
-      detritosDec, detritosJul, detritosJun, detritosMai, detritosMar,
-      detritosNov, detritosOut, detritosSet } = this.state;
+    const { thisYear, segurosJan, segurosFev, segurosAbr, segurosAgo,
+      segurosDec, segurosJul, segurosJun, segurosMai, segurosMar,
+      segurosNov, segurosOut, segurosSet } = this.state;
     const options = [];
 
     const barData = [
       {
         cluster: 'Jan',
         color: "#12939A",
-        data: [{ x: '', y: '' }, ...detritosJan]
+        data: [{ x: '', y: '' }, ...segurosJan]
       },
       {
         cluster: 'Fev',
         color: "#79C7E3",
-        data: [{ x: '',y: '' }, ...detritosFev]
+        data: [{ x: '',y: '' }, ...segurosFev]
       },
       {
         cluster: 'Mar',
         color: "#ff0000",
-        data: [{ x: '' ,y: ''}, ...detritosMar]
+        data: [{ x: '' ,y: ''}, ...segurosMar]
       },
       {
         cluster: 'Apr',
         color: "#800000",
-        data: [{ x: '' ,y: ''}, ...detritosAbr]
+        data: [{ x: '' ,y: ''}, ...segurosAbr]
       },
       {
         cluster: 'Mai',
         color: "#800080",
-        data: [{ x: '' ,y: ''}, ...detritosMai]
+        data: [{ x: '' ,y: ''}, ...segurosMai]
       },
       {
         cluster: 'Jun',
         color: "#ffa500",
-        data: [{ x: '' ,y: ''}, ...detritosJun]
+        data: [{ x: '' ,y: ''}, ...segurosJun]
       },
 
       {
         cluster: 'Jul',
         color: "#008000",
-        data: [{ x: '' ,y: ''}, ...detritosJul]
+        data: [{ x: '' ,y: ''}, ...segurosJul]
       },
       {
         cluster: 'Aug',
         color: "#00ff00",
-        data: [{ x: '' ,y: ''}, ...detritosAgo]
+        data: [{ x: '' ,y: ''}, ...segurosAgo]
       },
       {
         cluster: 'Set',
         color: "#808000",
-        data: [{ x: '' ,y: ''}, ...detritosSet]
+        data: [{ x: '' ,y: ''}, ...segurosSet]
       },
       {
         cluster: 'Out',
         color: "#a54850",
-        data: [{ x: '' ,y: ''}, ...detritosOut]
+        data: [{ x: '' ,y: ''}, ...segurosOut]
       },
       {
         cluster: 'Nov',
         color: "#000080",
-        data: [{ x: '' ,y: ''}, ...detritosNov]
+        data: [{ x: '' ,y: ''}, ...segurosNov]
       },
       {
         cluster: 'Dec',
         color: "#0000ff",
-        data: [{ x: '' ,y: ''}, ...detritosDec]
+        data: [{ x: '' ,y: ''}, ...segurosDec]
       },
     ]
 
@@ -354,11 +322,11 @@ class GraficoDetritos extends Component {
     return (
       <Box gridColumn="span 12">
         <Item elevation={3}>
-          <p1>Detritos (Quantidade)</p1>
+          <p1>Seguros (Quantidade)</p1>
           <div className="col-lg-2">
             <select
               options={this.selectedYear}
-              onChange={this.DateHandleDetritos.bind(this)}
+              onChange={this.DateHandleSeguros.bind(this)}
             >
               {options}
             </select>{" "}
@@ -408,8 +376,8 @@ class GraficoDetritos extends Component {
 
 
 const mapStateToprops = state => ({
-  detritos: state.detritosPraias
+  seguros: state.seguros
 });
 
 
-export default connect(mapStateToprops, { retrieveDetritosPraias })(GraficoDetritos);
+export default connect(mapStateToprops, { retrieveSeguros })(GraficoSeguros);

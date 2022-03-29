@@ -40,6 +40,7 @@ import EditConsulta from "../../pages/consulta/EditConsulta.jsx";
 
 //dashboard pages
 import DashboardCIO from "../../pages/dashboardCIO/dashboard";
+import DashboardCEO from "../../pages/dashboardCEO/dashboard";
 
 // context
 import { useLayoutState } from "../../context/LayoutContext";
@@ -69,6 +70,7 @@ function Layout(props) {
               <Route path="/app/add-consulta" component={AddConsulta} />
 
               <Route path="/app/dashboard-cio" component={DashboardCIO} />
+              <Route path="/app/dashboard-ceo" component={DashboardCEO} />
 
               <Route path="/app/typography" component={Typography} />
               <Route path="/app/tables" component={Tables} />

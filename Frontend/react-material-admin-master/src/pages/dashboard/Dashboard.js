@@ -36,10 +36,10 @@ import BigStat from "./components/BigStat/BigStat";
 
 const mainChartData = getMainChartData();
 const PieChartData = [
-  { name: "Group A", value: 400, color: "primary" },
-  { name: "Group B", value: 300, color: "secondary" },
-  { name: "Group C", value: 300, color: "warning" },
-  { name: "Group D", value: 200, color: "success" },
+  { name: "HP", value: 400, color: "primary" },
+  { name: "Asus", value: 300, color: "secondary" },
+  { name: "Samsung", value: 300, color: "warning" },
+  { name: "Cisco", value: 200, color: "success" },
 ];
 
 export default function Dashboard(props) {
@@ -51,13 +51,13 @@ export default function Dashboard(props) {
 
   return (
     <>
-      <PageTitle title="Dashboard" button={<Button
+      <PageTitle title="Dashboard" /* button={<Button
       variant="contained"
       size="medium"
       color="secondary"
     >
         Latest Reports
-    </Button>} />
+    </Button>} */ />
       <Grid container spacing={4}>
         <Grid item lg={3} md={4} sm={6} xs={12}>
           <Widget
@@ -138,7 +138,7 @@ export default function Dashboard(props) {
                   colorBrightness="secondary"
                   className={classes.legendElementText}
                 >
-                  Integration
+                  Integração
                 </Typography>
               </div>
               <div className={classes.legendElement}>
@@ -159,7 +159,7 @@ export default function Dashboard(props) {
                 colorBrightness="secondary"
                 className={classes.progressSectionTitle}
               >
-                Integration
+                Integração
               </Typography>
               <LinearProgress
                 variant="determinate"
@@ -317,7 +317,7 @@ export default function Dashboard(props) {
                   color="text"
                   colorBrightness="secondary"
                 >
-                  Daily Line Chart
+                  Line Chart
                 </Typography>
                 <div className={classes.mainChartHeaderLabels}>
                   <div className={classes.mainChartHeaderLabel}>
@@ -407,12 +407,12 @@ export default function Dashboard(props) {
             </ResponsiveContainer>
           </Widget>
         </Grid>
-        {mock.bigStat.map(stat => (
+        {/* {mock.bigStat.map(stat => (
           <Grid item md={4} sm={6} xs={12} key={stat.product}>
             <BigStat {...stat} />
           </Grid>
-        ))}
-        <Grid item xs={12}>
+        ))} */}
+        {/* <Grid item xs={12}>
           <Widget
             title="Support Requests"
             upperTitle
@@ -421,7 +421,7 @@ export default function Dashboard(props) {
           >
             <Table data={mock.table} />
           </Widget>
-        </Grid>
+        </Grid> */}
       </Grid>
     </>
   );

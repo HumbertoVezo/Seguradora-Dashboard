@@ -1,4 +1,4 @@
-import { retrieveDepartamentos } from "../../connections/departamentos/actions";
+import { retrieveHardwares } from "../../connections/hadwares/actions";
 import moment from "moment";
 import Box from "@mui/material/Box";
 import React, { Component } from "react";
@@ -16,21 +16,21 @@ import {
 import { Item } from "./Item";
 
 const minOffset = 0;
-const maxOffset = 5;
+const maxOffset = 10;
 
-const getInitialState = () => [
-  { x: "Janeiro", y: null },
-  { x: "Fevereiro", y: null },
-  { x: "Março", y: null },
-  { x: "Abril", y: null },
-  { x: "Maio", y: null },
-  { x: "Junho", y: null },
-  { x: "Julho", y: null },
-  { x: "Agosto", y: null },
-  { x: "Setembro", y: null },
-  { x: "Outubro", y: null },
-  { x: "Novembro", y: null },
-  { x: "Dezembro", y: null },
+const getInitialState = (jan, fev, mar, abr, mai, jun, jul, ago, set, out, nov, dez) => [
+  { x: "Janeiro", y: jan },
+  { x: "Fevereiro", y: fev },
+  { x: "Março", y: mar },
+  { x: "Abril", y: abr },
+  { x: "Maio", y: mai },
+  { x: "Junho", y: jun },
+  { x: "Julho", y: jul },
+  { x: "Agosto", y: ago },
+  { x: "Setembro", y: set },
+  { x: "Outubro", y: out },
+  { x: "Novembro", y: nov },
+  { x: "Dezembro", y: dez },
 ];
 
 class GraficoHardwares extends Component {
@@ -43,115 +43,106 @@ class GraficoHardwares extends Component {
       selectOptions: [],
       thisYear: new Date().getFullYear(),
       selectedYear: new Date().getFullYear(),
-      data_aquisicao: getInitialState(),
+      hp: getInitialState(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
       data_aquisicao1: getInitialState(),
+      marcas:[]
     };
   }
   componentDidMount() {
-    this.props.retrieveDepartamentos();
+    this.props.retrieveHardwares();
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.departamentoId !== this.props.departamentoId) {
-      this.onHandleChange(this.props.departamentoeId);
+    if (prevProps.hardwareId !== this.props.hardwareId) {
+      this.onHandleChange(this.props.hardwareId);
     }
+
+    if (this.props.hardwares !== prevProps.hardwares) {
+     this.HandleMarca();
+    }
+
   }
 
-  onHandleChange = (departamentoId) => {
-    const had_ware = this.props.departamento.filter(
-      (resultado) => resultado.departamento.id === departamentoId  // verificar isso se der erro
-    );
-    console.log(had_ware);
+  HandleMarca(){
+    const marca = this.props.hardwares.reduce((acc, hardware) => {
+      const exists = acc.find(item => item.marca === hardware.marca)
 
-    let media_janeiro = 0;
-    let total_janeiro = 0;
-    let soma_janeiro = 0;
-
-    let media_janeiro1 = 0;
-    let total_janeiro1 = 0;
-    let soma_janeiro1 = 0;
-
-    let media_janeiro2 = 0;
-    let total_janeiro2 = 0;
-    let soma_janeiro2 = 0;
-
-    let media_janeiro3 = 0;
-    let total_janeiro3 = 0;
-    let soma_janeiro3 = 0;
-
-    let media_fevereiro;
-    let total_fevereiro = 0;
-    let soma_fevereiro = 0;
-
-    let media_marco;
-    let total_marco = 0;
-    let soma_marco = 0;
-
-    let media_abril;
-    let total_abril = 0;
-    let soma_abril = 0;
-
-    let media_maio;
-    let total_maio = 0;
-    let soma_maio = 0;
-
-    let media_junho;
-    let total_junho = 0;
-    let soma_junho = 0;
-
-    let media_julho;
-    let total_julho = 0;
-    let soma_julho = 0;
-
-    let media_agosto;
-    let total_agosto = 0;
-    let soma_agosto = 0;
-
-    let media_setembro;
-    let total_setembro = 0;
-    let soma_setembro = 0;
-
-    let media_outubro;
-    let total_outubro = 0;
-    let soma_outubro = 0;
-
-    let media_novembro;
-    let total_novembro = 0;
-    let soma_novembro = 0;
-
-    let media_dezembro;
-    let total_dezembro = 0;
-    let soma_dezembro = 0;
-    had_ware.map((e) => {
-      if (moment(e.date).format("MMMM YYYY") == "January") {
-        total_janeiro += 1;
-        soma_janeiro = soma_janeiro + e.preco;
-        media_janeiro = soma_janeiro / total_janeiro;
-        total_janeiro1 += 1;
-        soma_janeiro1 = soma_janeiro1 + e.preco;
-        media_janeiro1 = soma_janeiro1 / total_janeiro1;
-
-        total_janeiro2 += 1;
-        soma_janeiro2 = soma_janeiro2 + e.preco;
-        media_janeiro2 = soma_janeiro2 / total_janeiro2;
-        total_janeiro3 += 1;
-        soma_janeiro3 = soma_janeiro3 + e.preco;
-        media_janeiro3 = soma_janeiro3 / total_janeiro3;
-      } else if (moment(e.date).format("MMMM YYYY") == "February") {
+      if (!exists) {
+        acc.push({id:hardware.id, marca:hardware.marca})
       }
-    });
-    this.UpdateUpdateInitialStateState(
-      "Janeiro",
-      media_janeiro,
-      media_janeiro1,
-      media_janeiro2,
-      media_janeiro3
-    );
-  };
+      return acc
+    },[])
+    this.setState({marcas:marca})
+  }
 
-  UpdateUpdateInitialStateState(month) {
+  onHandleChange = (hardwareId) => {
+     const hardwares = this.props.hardwares.filter(
+       (had_ware) => had_ware.marca === hardwareId  // verificar isso se der erro
+     );
+
+    let precoJanHp = 0
+    let precoFevHp = 0
+    let precoMarHp = 0
+    let precoAbrHp = 0
+    let precoMaiHp = 0
+    let precoJunHp = 0
+    let precoJulHp = 0
+    let precoAgoHp = 0
+    let precoSetHp = 0
+    let precoOutHp = 0
+    let precoNovHp = 0
+    let precoDecHp = 0
+    
+
+    hardwares.map((hardware) => {
+        if (moment(hardware.data_aquisicao).format("MMMM") == "January") {
+          precoJanHp += parseInt(hardware.preco, 10)
+        } else if (moment(hardware.date).format("MMMM YYYY") == "February") {
+          precoFevHp += parseInt(hardware.preco, 10)
+        } else if (moment(hardware.data_aquisicao).format("MMMM") == "March") {
+          precoMarHp += parseInt(hardware.preco, 10)
+        } else if (moment(hardware.data_aquisicao).format("MMMM") == "April") {
+          precoAbrHp += parseInt(hardware.preco, 10)
+        }else if (moment(hardware.data_aquisicao).format("MMMM") == "May") {
+          precoMaiHp += parseInt(hardware.preco, 10)
+        }else if (moment(hardware.data_aquisicao).format("MMMM") == "June") {
+          precoJunHp += parseInt(hardware.preco, 10)
+        }else if (moment(hardware.data_aquisicao).format("MMMM") == "July") {
+          precoJulHp += parseInt(hardware.preco, 10)
+        }else if (moment(hardware.data_aquisicao).format("MMMM") == "August") {
+          precoAgoHp += parseInt(hardware.preco, 10)
+        }else if (moment(hardware.data_aquisicao).format("MMMM") == "September") {
+          precoSetHp += parseInt(hardware.preco, 10)
+        }else if (moment(hardware.data_aquisicao).format("MMMM") == "October") {
+          precoOutHp += parseInt(hardware.preco, 10)
+        }else if (moment(hardware.data_aquisicao).format("MMMM") == "November") {
+          precoNovHp += parseInt(hardware.preco, 10)
+        }else if (moment(hardware.data_aquisicao).format("MMMM") == "December") {
+          precoDecHp += parseInt(hardware.preco, 10)
+        } 
+        
+      
+
+    });
+
+    this.UpdateUpdateInitialStateState("hp",
+      precoJanHp,
+      precoFevHp,
+      precoMarHp,
+      precoAbrHp,
+      precoMaiHp,
+      precoJunHp,
+      precoJulHp,
+      precoAgoHp,
+      precoSetHp,
+      precoOutHp,
+      precoNovHp,
+      precoDecHp,
+    )
+  }
+  UpdateUpdateInitialStateState(marca, jan, fev, mar, abr, mai, jun, jul, ago, set, out, nov, dec) {
     this.setState({
-      [`had-wares${month}`]: getInitialState(),
+      [marca]: getInitialState(jan, fev, mar, abr, mai, jun, jul, ago, set, out, nov, dec),
     });
   }
 
@@ -159,41 +150,39 @@ class GraficoHardwares extends Component {
     const { thisYear, selectedYear } = this.state;
     const options = [];
 
-    const handleCustomScale = (tick) => {
-      // Can be add a customStart parameter to sum with result
-      //                                     if scales doesn't start at same point
-      const maxSalesValue = Math.max(
-        ...this.state.data_aquisicao.map((item) => item.y)
-      ); // Get max value from sales data
-      const maxPriceValue = Math.max(
-        ...this.state.data_aquisicao1.map((item) => item.y)
-      ); // Get max value from prices data
-      const factor = maxSalesValue / maxPriceValue; // Calculate factor to convert sales tick to price tick
-      return Math.round(tick / factor); // Return result as a integer
-    };
+    /*  const handleCustomScale = (tick) => {
+       // Can be add a customStart parameter to sum with result
+       //                                     if scales doesn't start at same point
+       const maxSalesValue = Math.max(
+         ...this.state.data_aquisicao.map((item) => item.y)
+       ); // Get max value from sales data
+       const maxPriceValue = Math.max(
+         ...this.state.data_aquisicao1.map((item) => item.y)
+       ); // Get max value from prices data
+       const factor = maxSalesValue / maxPriceValue; // Calculate factor to convert sales tick to price tick
+       return Math.round(tick / factor); // Return result as a integer
+     };*/
 
     for (let i = minOffset; i <= maxOffset; i++) {
       const year = thisYear - i;
       options.push(<option value={year}>{year}</option>);
     }
+
     return (
       <Box gridColumn="span 12" sx={{ flexGrow: 1 }}>
         <Item elevation={3}>
-          <p1>
-            Gráfico de barras dos hardwares por departamentos adequiridos   
-            ao longo do tempo
-          </p1>
+          <p1>Gráfico de barras dos hardwares adquiridos</p1>
           <div className="col-lg-2">
-            <select options={this.selectedYear} onChange={this.onHandleChange}>
-              {options}
+            <select onChange={e => this.onHandleChange(e.target.value)}>
+              {this.state.marcas.map(item => ( <option value={item.marca}>{item.marca}</option>))}
             </select>{" "}
           </div>
           <center>
             <XYPlot
               className="clustered-stacked-bar-chart-example"
               xType="ordinal"
-              width={950}
-              height={350}
+              width={800}
+              height={400}
             >
               <DiscreteColorLegend
                 width={150}
@@ -205,17 +194,17 @@ class GraficoHardwares extends Component {
                 }}
                 items={[
                   {
-                    title: "Velocidade",
+                    title: "Preço",
                     color: "#f37748",
                   },
                   {
-                    title: "Direção",
+                    title: "Produto",
                     color: "#067BC2",
                   },
                 ]}
               />
 
-              <YAxis title="Velocidade(m/s)" />
+              <YAxis title="Preço (CVE)" />
               <HorizontalGridLines />
               <XAxis tickLabelAngle={-28} />
 
@@ -224,26 +213,17 @@ class GraficoHardwares extends Component {
                 color="#f37748"
                 data={[
                   { x: "", y: "" },
-                  ...this.state.data_aquisicao,
+                  ...this.state.hp,
                 ]}
               />
 
               <YAxis
-                title="Direção (graus)"
+                title=""
                 orientation="right"
-                tickFormat={(v) => handleCustomScale(v)}
+
               />
               <XAxis orientation="top" />
               <YAxis orientation="right" />
-              <LineSeries
-                cluster="direcao"
-                color="#067BC2"
-                Type="line"
-                data={[
-                  { x: "", y: "" },
-                  ...this.state.data_aquisicao,
-                ]}
-              />
             </XYPlot>
           </center>{" "}
         </Item>
@@ -253,9 +233,10 @@ class GraficoHardwares extends Component {
 }
 const mapStateToProps = (state) => {
   return {
-    had_wares: state.had_wares,
+    departamentos: state.departamentos,
+    hardwares: state.had_wares
   };
 };
 export default connect(mapStateToProps, {
-  retrieveDepartamentos,
+  retrieveHardwares,
 })(GraficoHardwares);

@@ -59,11 +59,10 @@ export const retrieveHardwares = () => async (dispatch) => {
     try {
 
         const res = await HardwaresService.getAll();
-
+      
         dispatch({
 
             type: RETRIEVE_HARDWARES,
-
             payload: res.data,
 
         });

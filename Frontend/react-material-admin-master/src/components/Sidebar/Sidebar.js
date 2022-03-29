@@ -34,20 +34,14 @@ const structure = [
   {
     id: 4,
     label: "CIO",
-    link: "/app",
-    icon: <UIElementsIcon />,
-    children: [
-      { label: "Consultas", link: "/app/list-consulta" },
-    ],
+    link: "/app/dashboard-cio",
+    icon: <HomeIcon />,
   },
   {
     id: 1,
     label: "CEO",
-    link: "/app",
-    icon: <TypographyIcon />,
-    children: [
-      { label: "Consultas", link: "/app/list-consulta" },
-    ],
+    link: "/app/dashboard-ceo",
+    icon: <HomeIcon />,
   },
   /* {
     id: 1,

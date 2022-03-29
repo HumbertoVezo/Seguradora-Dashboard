@@ -1,10 +1,10 @@
 
-import { retrieveMedicaoondas } from "../../../conection/medicaoondas/actions";
+import { retrieveSeguros } from "../../connections/seguros/actions";
 import moment from "moment";
 import Box from "@mui/material/Box";
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import Select from "react-select";
+//import Select from "react-select";
 
 import {
     XYPlot,
@@ -15,9 +15,9 @@ import {
 } from "react-vis";
 import { Item } from "./Item";
 const minOffset = 0;
-const maxOffset = 60;
+const maxOffset = 10;
 
-class GraficoOndas extends Component {
+class GraficoEstado extends Component {
     constructor(props) {
         super(props);
 
@@ -28,7 +28,7 @@ class GraficoOndas extends Component {
             selectOptions: [],
             thisYear: new Date().getFullYear(),
             selectedYear: new Date().getFullYear(),
-            data_medicao_onda: [
+            data_seguro: [
                 { x: 'Janeiro', y: null },
                 { x: 'Fevereiro', y: null },
                 { x: 'Março', y: null },
@@ -45,16 +45,16 @@ class GraficoOndas extends Component {
     }
 
     componentDidMount() {
-        this.props.retrieveMedicaoondas();
+        this.props.retrieveSeguros();
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if(prevProps.praiaId !== this.props.praiaId) {
-            this.onHandleChange(this.props.praiaId)
+        if(prevProps.seguradoId !== this.props.seguradoId) {
+            this.onHandleChange(this.props.seguradoId)
         }
     }
-    onHandleChange = (praiaId) => {
-        const resultado1 = this.props.medicaoondas.filter(resultado => resultado.praia.id === praiaId)
+    onHandleChange = (seguradoId) => {
+        const resultado1 = this.props.seguros.filter(seguro => seguro.segurado.id === seguradoId)
         console.log(resultado1)
         let valor1 = 0
         let valor2 = 0
@@ -71,37 +71,37 @@ class GraficoOndas extends Component {
 
         resultado1.map(e => {
             if (moment(e.date).format('MMMM') == 'January') {
-                valor1 = e.wave_heigth
+                valor1 = e.situacao
             } else if (moment(e.date).format('MMMM') == 'February') {
-                valor2 += e.wave_heigth
+                valor2 += e.situacao
             }
             else if (moment(e.date).format('MMMM') == 'March') {
-                valor3 += e.wave_heigth
+                valor3 += e.situacao
             } else if (moment(e.date).format('MMMM') == 'April') {
-                valor4 += e.wave_heigth
+                valor4 += e.situacao
             } else if (moment(e.date).format('MMMM') == 'May') {
-                valor4 += e.wave_heigth
+                valor4 += e.situacao
             }
             else if (moment(e.date).format('MMMM') == 'June') {
-                valor6 += e.wave_heigth
+                valor6 += e.situacao
             } else if (moment(e.date).format('MMMM') == 'July') {
-                valor7 += e.wave_heigth
+                valor7 += e.situacao
             } else if (moment(e.date).format('MMMM') == ' August') {
-                valor8 += e.wave_heigth
+                valor8 += e.situacao
             } else if (moment(e.date).format('MMMM') == 'September') {
-                valor9 += e.wave_heigth
+                valor9 += e.situacao
             } else if (moment(e.date).format('MMMM') == 'October') {
-                valor10 += e.wave_heigth
+                valor10 += e.situacao
             } else if (moment(e.date).format('MMMM YYYY') == 'November') {
-                valor11 += e.wave_heigth
+                valor11 += e.situacao
             } else if (moment(e.date).format('MMMM YYYY') == 'December') {
-                valor12 += e.wave_heigth
+                valor12 += e.situacao
             }
 
         })
 
         this.setState({
-            data_medicao_onda: [{ x: 'Janeiro', y: valor1 }, { x: 'Fevereiro', y: valor2 }, { x: 'Março', y: valor3 }, { x: 'Abril', y: valor4 }, { x: 'Maio', y: valor5 },
+            data_seguro: [{ x: 'Janeiro', y: valor1 }, { x: 'Fevereiro', y: valor2 }, { x: 'Março', y: valor3 }, { x: 'Abril', y: valor4 }, { x: 'Maio', y: valor5 },
             { x: 'Junho', y: valor6 }, { x: 'Julho', y: valor7 }, { x: 'Agosto', y: valor8 }, { x: 'Setembro', y: valor9 }, { x: 'Outubro', y: valor10 }, { x: 'Novembro', y: valor11 }, { x: 'Dezembro', y: valor12 },]
         })
     };
@@ -139,7 +139,7 @@ class GraficoOndas extends Component {
                             <XAxis tickLabelAngle={-28} />
                             <VerticalBarSeries
                                 cluster="2016"
-                                data={[{ x: '', y: '' }, ...this.state.data_medicao_onda]}
+                                data={[{ x: '', y: '' }, ...this.state.data_seguro]}
                             />
                         </XYPlot></center> </Item>
                 </Box>
@@ -151,9 +151,9 @@ class GraficoOndas extends Component {
 }
 const mapStateToProps = (state) => {
     return {
-        medicaoondas: state.medicaoondas,
+        seguros: state.seguros,
     };
 };
 export default connect(mapStateToProps, {
-    retrieveMedicaoondas
-})(GraficoOndas);
+    retrieveSeguros
+})(GraficoEstado);
